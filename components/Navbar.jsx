@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
@@ -49,7 +48,7 @@ export function Navbar() {
             <>
               <div className="avatar">
                 <div className="relative h-10 w-10 overflow-hidden rounded-full ring ring-primary ring-offset-2">
-                  <Image src={user.photoURL} alt={user.name} fill className="object-cover" sizes="40px" />
+                  <img src={user.photoURL} alt={user.name} className="h-full w-full object-cover" />
                 </div>
               </div>
               <button onClick={logout} className="btn btn-outline btn-primary">Logout</button>

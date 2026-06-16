@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Course } from "@/lib/courses";
 
-export function CourseCard({ course }: { course: Course }) {
+export function CourseCard({ course }) {
   return (
     <article className="course-card grid h-full overflow-hidden rounded-lg shadow-soft transition hover:-translate-y-1 hover:shadow-xl">
       <div className="relative aspect-[16/10]">
