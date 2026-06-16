@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss";
+import daisyui from "daisyui";
 
-const config: Config = {
+const config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -20,7 +20,7 @@ const config: Config = {
       }
     }
   },
-  plugins: [require("daisyui")],
+  plugins: [daisyui],
   daisyui: {
     themes: [
       {
