@@ -5,7 +5,12 @@ export function Footer() {
     <footer className="mt-20 border-t border-slate-200 bg-white/80">
       <div className="section-shell grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <Link href="/" className="text-2xl font-black text-ink">SkillSphere</Link>
+          <Link href="/" className="inline-flex items-center gap-2 text-2xl font-black text-ink">
+            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-ink text-sm font-black text-white shadow-soft">
+              SS
+            </span>
+            <span>SkillSphere</span>
+          </Link>
           <p className="mt-3 max-w-md text-sm leading-6 text-slate-600">
             SkillSphere helps learners discover practical programs, follow guided lessons, and build career-ready skills.
           </p>
