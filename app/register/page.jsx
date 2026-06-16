@@ -2,13 +2,25 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 
 export default function RegisterPage() {
   const router = useRouter();
   const { register, googleLogin } = useAuth();
   const [form, setForm] = useState({ name: "", email: "", photoURL: "", password: "" });
+  const fileInputRef = useRef(null);
+
+  function handlePhotoSelect(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setForm((currentForm) => ({ ...currentForm, photoURL: reader.result }));
+    };
+    reader.readAsDataURL(file);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -35,7 +47,15 @@ export default function RegisterPage() {
           </label>
           <label className="form-control">
             <span className="label-text font-semibold">Photo URL</span>
-            <input className="input input-bordered bg-white" type="url" value={form.photoURL} onChange={(e) => setForm({ ...form, photoURL: e.target.value })} required />
+            <input
+              className="input input-bordered cursor-pointer bg-white"
+              value={form.photoURL ? "Photo selected successfully" : ""}
+              onClick={() => fileInputRef.current?.click()}
+              placeholder="Click to choose a profile photo"
+              readOnly
+              required
+            />
+            <input ref={fileInputRef} className="hidden" type="file" accept="image/*" onChange={handlePhotoSelect} />
           </label>
           <label className="form-control">
             <span className="label-text font-semibold">Password</span>
