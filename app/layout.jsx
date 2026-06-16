@@ -1,16 +1,15 @@
-import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { AuthProvider } from "@/lib/auth-context";
 import "./globals.css";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "SkillSphere - Online Learning Platform",
   description: "Explore, enroll, and track progress in modern skill-based courses."
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="skillsphere">
       <body>
