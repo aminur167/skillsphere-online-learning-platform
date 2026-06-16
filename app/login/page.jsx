@@ -42,7 +42,7 @@ function LoginForm() {
           </label>
           <label className="form-control">
             <span className="label-text font-semibold">Password</span>
-            <input className="input input-bordered bg-white" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <input className="input input-bordered bg-white" type="password" minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} required />
           </label>
           <button className="btn btn-primary">Login</button>
         </form>

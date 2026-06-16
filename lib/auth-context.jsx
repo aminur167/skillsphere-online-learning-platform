@@ -17,6 +17,15 @@ function saveUsers(users) {
   window.localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
+function buildNameFromEmail(email) {
+  return email
+    .split("@")[0]
+    .split(/[._-]/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ") || "SkillSphere Learner";
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,12 +40,19 @@ export function AuthProvider({ children }) {
     user,
     loading,
     login(email, password) {
-      const found = getStoredUsers().find((item) => item.email === email && item.password === password);
-      if (!found) {
-        toast.error("Invalid email or password");
+      const normalizedEmail = email.trim().toLowerCase();
+      if (!normalizedEmail.endsWith("@gmail.com") || password.length < 6) {
+        toast.error("Use a valid Gmail and at least 6 characters password");
         return false;
       }
-      const nextUser = { name: found.name, email: found.email, photoURL: found.photoURL };
+      const users = getStoredUsers();
+      const found = users.find((item) => item.email.toLowerCase() === normalizedEmail);
+      const nextUser = found
+        ? { name: found.name, email: found.email, photoURL: found.photoURL }
+        : { name: buildNameFromEmail(normalizedEmail), email: normalizedEmail, photoURL: "" };
+      if (!found) {
+        saveUsers([...users, { ...nextUser, password }]);
+      }
       setUser(nextUser);
       window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(nextUser));
       toast.success("Login successful");
@@ -54,9 +70,9 @@ export function AuthProvider({ children }) {
     },
     googleLogin() {
       const nextUser = {
-        name: "Google Learner",
-        email: "google.learner@skillsphere.dev",
-        photoURL: "https://api.dicebear.com/9.x/initials/svg?seed=Google%20Learner"
+        name: "Aminur Islam",
+        email: "aminurhstu23@gmail.com",
+        photoURL: ""
       };
       setUser(nextUser);
       window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(nextUser));

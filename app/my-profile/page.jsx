@@ -4,6 +4,16 @@ import Link from "next/link";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useAuth } from "@/lib/auth-context";
 
+function getInitials(name) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+}
+
 export default function MyProfilePage() {
   const { user } = useAuth();
 
@@ -14,7 +24,13 @@ export default function MyProfilePage() {
           {user && (
             <>
               <div className="relative mx-auto h-32 w-32 overflow-hidden rounded-full ring ring-primary ring-offset-4">
-                <img src={user.photoURL} alt={user.name} className="h-full w-full object-cover" />
+                {user.photoURL ? (
+                  <img src={user.photoURL} alt={user.name} className="h-full w-full object-cover" />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-ink text-3xl font-black text-white">
+                    {getInitials(user.name)}
+                  </div>
+                )}
               </div>
               <h1 className="mt-6 text-4xl font-black text-ink">{user.name}</h1>
               <p className="mt-2 text-slate-600">{user.email}</p>

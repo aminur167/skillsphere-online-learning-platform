@@ -10,6 +10,16 @@ const links = [
   { href: "/my-profile", label: "My Profile" }
 ];
 
+function getInitials(name) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+}
+
 export function Navbar() {
   const pathname = usePathname();
   const { user, logout, loading } = useAuth();
@@ -50,14 +60,16 @@ export function Navbar() {
           {loading ? (
             <span className="loading loading-spinner loading-sm" />
           ) : user ? (
-            <>
-              <div className="avatar">
-                <div className="relative h-10 w-10 overflow-hidden rounded-full ring ring-primary ring-offset-2">
-                  <img src={user.photoURL} alt={user.name} className="h-full w-full object-cover" />
-                </div>
+            <div className="flex items-center gap-3">
+              <div className="hidden text-right sm:block">
+                <p className="text-sm font-black leading-none text-ink">{user.name}</p>
+                <p className="mt-1 text-xs font-semibold text-slate-500">Premium Learner</p>
+              </div>
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-sm font-black text-white ring-2 ring-primary ring-offset-2">
+                {getInitials(user.name)}
               </div>
               <button onClick={logout} className="btn btn-outline btn-primary">Logout</button>
-            </>
+            </div>
           ) : (
             <>
               <Link href="/login" className="btn btn-ghost">Login</Link>
