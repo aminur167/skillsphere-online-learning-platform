@@ -9,15 +9,17 @@ export function Footer() {
           <p className="mt-3 max-w-md text-sm leading-6 text-slate-600">
             SkillSphere helps learners discover practical programs, follow guided lessons, and build career-ready skills.
           </p>
-          <p className="mt-4 text-sm text-slate-600">Email: support@skillsphere.dev</p>
-          <p className="text-sm text-slate-600">Phone: +880 1700 000 000</p>
+          <p className="mt-4 text-sm text-slate-600">Email: aminurhstu23@gmail.com</p>
+          <p className="text-sm text-slate-600">Phone: 01308825783</p>
+          <p className="text-sm text-slate-600">WhatsApp: 01827752014</p>
         </div>
         <div>
           <h3 className="font-bold text-ink">Social</h3>
           <div className="mt-3 grid gap-2 text-sm text-slate-600">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://x.com" target="_blank" rel="noreferrer">X</a>
+            <a href="https://www.facebook.com/aminur.islam.668300" target="_blank" rel="noreferrer">Facebook</a>
+            <a href="https://www.linkedin.com/in/aminur167/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://x.com/aminur_167" target="_blank" rel="noreferrer">X</a>
+            <a href="https://www.instagram.com/aminur_167/" target="_blank" rel="noreferrer">Instagram</a>
           </div>
         </div>
         <div>
