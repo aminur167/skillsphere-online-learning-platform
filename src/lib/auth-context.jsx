@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
+import { getBetterAuthUser, signOutBetterAuth } from "@/lib/auth";
 
 const AuthContext = createContext(null);
 const CURRENT_USER_KEY = "skillsphere.currentUser";
@@ -35,9 +36,30 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const raw = window.localStorage.getItem(CURRENT_USER_KEY);
-    if (raw) setUser(JSON.parse(raw));
-    setLoading(false);
+    let isMounted = true;
+
+    async function loadUser() {
+      const raw = window.localStorage.getItem(CURRENT_USER_KEY);
+      if (raw && isMounted) setUser(JSON.parse(raw));
+
+      try {
+        const betterAuthUser = await getBetterAuthUser();
+        if (betterAuthUser && isMounted) {
+          setUser(betterAuthUser);
+          window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(betterAuthUser));
+        }
+      } catch {
+        // Demo auth still works if BetterAuth session is unavailable locally.
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+
+    loadUser();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const value = useMemo(() => ({
@@ -83,6 +105,7 @@ export function AuthProvider({ children }) {
       toast.success("Google login successful");
     },
     logout() {
+      signOutBetterAuth().catch(() => {});
       setUser(null);
       window.localStorage.removeItem(CURRENT_USER_KEY);
       toast.success("Logged out");

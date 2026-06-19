@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { signInWithGoogle } from "@/lib/auth";
 import { useAuth } from "@/lib/auth-context";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { register, googleLogin } = useAuth();
+  const { register } = useAuth();
   const [form, setForm] = useState({ name: "", email: "", photoURL: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const fileInputRef = useRef(null);
@@ -28,9 +30,12 @@ export default function RegisterPage() {
     if (register(form)) router.push("/login");
   }
 
-  function handleGoogleRegister() {
-    googleLogin();
-    router.push("/");
+  async function handleGoogleRegister() {
+    try {
+      await signInWithGoogle("/");
+    } catch {
+      toast.error("Google login is not configured yet");
+    }
   }
 
   return (

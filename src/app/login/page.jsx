@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
+import toast from "react-hot-toast";
+import { signInWithGoogle } from "@/lib/auth";
 import { useAuth } from "@/lib/auth-context";
 
 export default function LoginPage() {
@@ -17,7 +19,7 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
-  const { login, googleLogin } = useAuth();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -27,9 +29,12 @@ function LoginForm() {
     if (login(email, password)) router.push(redirect);
   }
 
-  function handleGoogleLogin() {
-    googleLogin();
-    router.push(redirect);
+  async function handleGoogleLogin() {
+    try {
+      await signInWithGoogle(redirect);
+    } catch {
+      toast.error("Google login is not configured yet");
+    }
   }
 
   return (
