@@ -73,6 +73,10 @@ export function AuthProvider({ children }) {
       }
       const users = getStoredUsers();
       const found = users.find((item) => item.email.toLowerCase() === normalizedEmail);
+      if (found && found.password !== password) {
+        toast.error("Password does not match this account");
+        return false;
+      }
       const nextUser = found
         ? { name: found.name, email: found.email, photoURL: found.photoURL }
         : { name: buildNameFromEmail(normalizedEmail), email: normalizedEmail, photoURL: "" };
@@ -93,16 +97,6 @@ export function AuthProvider({ children }) {
       saveUsers([...users, payload]);
       toast.success("Registration successful. Please login.");
       return true;
-    },
-    googleLogin() {
-      const nextUser = {
-        name: "Aminur Islam",
-        email: "aminurhstu23@gmail.com",
-        photoURL: ""
-      };
-      setUser(nextUser);
-      window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(nextUser));
-      toast.success("Google login successful");
     },
     logout() {
       signOutBetterAuth().catch(() => {});
