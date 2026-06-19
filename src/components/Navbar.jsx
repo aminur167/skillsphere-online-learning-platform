@@ -61,17 +61,19 @@ export function Navbar() {
             <span className="loading loading-spinner loading-sm" />
           ) : user ? (
             <div className="flex items-center gap-3">
-              <div className="hidden text-right sm:block">
-                <p className="text-sm font-black leading-none text-ink">{user.name}</p>
-                <p className="mt-1 text-xs font-semibold text-slate-500">Premium Learner</p>
-              </div>
-              <div className="h-11 w-11 overflow-hidden rounded-full bg-ink text-sm font-black text-white ring-2 ring-primary ring-offset-2">
-                {user.photoURL ? (
-                  <img src={user.photoURL} alt={user.name} className="h-full w-full object-cover" />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center">{getInitials(user.name)}</div>
-                )}
-              </div>
+              <Link href="/my-profile/update" className="flex items-center gap-3" title="Update profile">
+                <div className="hidden text-right sm:block">
+                  <p className="text-sm font-black leading-none text-ink">{user.name}</p>
+                  <p className="mt-1 text-xs font-semibold text-slate-500">Premium Learner</p>
+                </div>
+                <div className="h-11 w-11 overflow-hidden rounded-full bg-ink text-sm font-black text-white ring-2 ring-primary ring-offset-2">
+                  {user.photoURL ? (
+                    <img src={user.photoURL} alt={user.name} className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center">{getInitials(user.name)}</div>
+                  )}
+                </div>
+              </Link>
               <button onClick={logout} className="btn btn-outline btn-primary">Logout</button>
             </div>
           ) : (
