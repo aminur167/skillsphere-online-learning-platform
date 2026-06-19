@@ -3,10 +3,17 @@ import { createAuthClient } from "better-auth/client";
 export const authClient = createAuthClient();
 
 export async function signInWithGoogle(callbackURL = "/") {
-  return authClient.signIn.social({
+  const result = await authClient.signIn.social({
     provider: "google",
     callbackURL
   });
+
+  const redirectURL = result?.data?.url || result?.url;
+  if (redirectURL && typeof window !== "undefined") {
+    window.location.href = redirectURL;
+  }
+
+  return result;
 }
 
 export async function getBetterAuthUser() {
