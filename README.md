@@ -1,30 +1,35 @@
 # SkillSphere - Online Learning Platform
 
-SkillSphere is a modern online learning platform where learners can explore skill-based courses, view detailed lesson plans, and manage their learning profile. The project focuses on a clean course discovery experience with protected routes, responsive layouts, and a smooth authentication flow.
+SkillSphere is a modern online learning platform built with Next.js, React, Tailwind CSS, and DaisyUI. It helps learners explore skill-based courses, view protected course details, register or login, and manage their profile from a clean responsive interface.
 
-## Live URL
+## Live Site
 
-`https://skillsphere-online-learning-platform.vercel.app`
+Deployment link will be added after hosting on Vercel.
 
 ## Repository
 
-`https://github.com/aminur167/skillsphere-online-learning-platform`
+https://github.com/aminur167/skillsphere-online-learning-platform
 
-## Features
+## Purpose
 
-- Responsive navbar with Home, Courses, and My Profile routes.
-- Authentication-aware navbar with avatar, logout, login, and register actions.
-- Home page with full-screen hero slider, popular courses, learning tips, top instructors, and trending courses.
-- All Courses page with 6 skill-based courses and title search.
-- Protected Course Details page with course image, instructor, duration, rating, level, students, lessons, and curriculum.
+The purpose of SkillSphere is to provide a polished course discovery experience for learners who want to build career-ready skills in web development, design, marketing, data analytics, business, and cybersecurity.
+
+## Key Features
+
+- Responsive layout for mobile, tablet, and desktop screens.
+- Persistent navbar and footer across all pages.
+- Home page with hero slider, popular courses, learning tips, top instructors, and trending courses.
+- All Courses page with searchable course cards.
+- Course Details page with protected route behavior.
+- Redirects unauthenticated users to login and returns them to the requested page after login.
 - Login and registration forms with toast notifications.
 - Google login button for social authentication flow.
-- My Profile page with user information.
-- Update Information page for changing user name and image URL.
-- Persistent footer with contact details, social links, terms, and privacy pages.
-- Loader states, custom not-found page, and reload-safe App Router structure.
-- BetterAuth API scaffold with environment-variable based configuration.
-- Browser-friendly demo auth flow for smooth login, register, and profile updates.
+- My Profile page for logged-in user information.
+- Update Information page for changing name and profile image.
+- Profile image upload from local device with instant preview.
+- Custom loading UI and not-found page.
+- Reload-safe App Router structure.
+- BetterAuth API scaffold with environment-variable configuration.
 
 ## Tech Stack
 
@@ -38,7 +43,7 @@ SkillSphere is a modern online learning platform where learners can explore skil
 - Swiper JS
 - React Hot Toast
 
-## NPM Packages
+## NPM Packages Used
 
 - `next`
 - `react`
@@ -53,7 +58,7 @@ SkillSphere is a modern online learning platform where learners can explore skil
 
 ## Environment Variables
 
-Create a `.env.local` file in the project root:
+Create a `.env.local` file in the project root and add the following values:
 
 ```env
 BETTER_AUTH_SECRET="replace-with-a-long-random-secret"
@@ -63,9 +68,28 @@ GOOGLE_CLIENT_SECRET="your-google-client-secret"
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
 
-## Authentication
+For Vercel deployment, add the same variables in the Vercel project settings and update `BETTER_AUTH_URL` plus `NEXT_PUBLIC_APP_URL` with your deployed domain.
 
-The project includes a BetterAuth route scaffold at `src/app/api/auth/[...all]/route.js` and also keeps a browser-friendly demo auth flow so reviewers can register, login, logout, update profile information, and upload a profile photo without email verification.
+## Folder Structure
+
+```text
+src/
+  app/
+  components/
+  lib/
+```
+
+## Routes
+
+- `/` - Home
+- `/courses` - All courses with search
+- `/courses/[id]` - Protected course details
+- `/login` - Login
+- `/register` - Register
+- `/my-profile` - User profile
+- `/my-profile/update` - Update user information
+- `/terms` - Terms and conditions
+- `/privacy` - Privacy policy
 
 ## Run Locally
 
@@ -74,7 +98,7 @@ npm install
 npm run dev
 ```
 
-Open:
+Open the app:
 
 ```bash
 http://localhost:3000
@@ -87,14 +111,8 @@ npm run build
 npm start
 ```
 
-## Route Overview
+## Deployment
 
-- `/` - Home
-- `/courses` - All courses with search
-- `/courses/[id]` - Protected course details
-- `/login` - Login
-- `/register` - Register
-- `/my-profile` - Protected profile
-- `/my-profile/update` - Protected profile update
-- `/terms` - Terms and conditions
-- `/privacy` - Privacy policy
+Recommended deployment platform: Vercel.
+
+After deploying, replace the Live Site section with your actual Vercel URL.
