@@ -7,7 +7,7 @@ const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
 const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET || "development-only-secret-change-in-production",
-  baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+  baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL,
   ...(googleClientId && googleClientSecret
     ? {
       socialProviders: {
