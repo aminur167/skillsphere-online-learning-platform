@@ -49,6 +49,12 @@ export default function UpdateProfilePage() {
             </label>
             <label className="form-control">
               <span className="label-text font-semibold">Image URL</span>
+              {photoURL && (
+                <div className="mb-3 flex items-center gap-3 rounded-lg border border-slate-200 bg-white p-3">
+                  <img src={photoURL} alt="Selected profile" className="h-14 w-14 rounded-full object-cover ring-2 ring-primary ring-offset-2" />
+                  <span className="text-sm font-semibold text-slate-600">Photo updated on your profile</span>
+                </div>
+              )}
               <input
                 className="input input-bordered cursor-pointer bg-white"
                 value={photoURL ? "Photo selected successfully" : ""}

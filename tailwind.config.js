@@ -2,9 +2,9 @@ import daisyui from "daisyui";
 
 const config = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./lib/**/*.{js,ts,jsx,tsx,mdx}"
+    "./src/app/**/*.{js,jsx,mdx}",
+    "./src/components/**/*.{js,jsx,mdx}",
+    "./src/lib/**/*.{js,jsx,mdx}"
   ],
   theme: {
     extend: {

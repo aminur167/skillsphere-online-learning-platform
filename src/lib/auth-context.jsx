@@ -26,6 +26,10 @@ function buildNameFromEmail(email) {
     .join(" ") || "SkillSphere Learner";
 }
 
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -41,8 +45,8 @@ export function AuthProvider({ children }) {
     loading,
     login(email, password) {
       const normalizedEmail = email.trim().toLowerCase();
-      if (!normalizedEmail.endsWith("@gmail.com") || password.length < 6) {
-        toast.error("Use a valid Gmail and at least 6 characters password");
+      if (!isValidEmail(normalizedEmail) || password.length < 6) {
+        toast.error("Use a valid email and at least 6 characters password");
         return false;
       }
       const users = getStoredUsers();

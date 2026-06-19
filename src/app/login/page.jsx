@@ -20,6 +20,7 @@ function LoginForm() {
   const { login, googleLogin } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -42,7 +43,24 @@ function LoginForm() {
           </label>
           <label className="form-control">
             <span className="label-text font-semibold">Password</span>
-            <input className="input input-bordered bg-white" type="password" minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <div className="input input-bordered flex items-center gap-2 bg-white">
+              <input
+                className="grow bg-transparent outline-none"
+                type={showPassword ? "text" : "password"}
+                minLength={6}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="btn btn-ghost btn-xs"
+                onClick={() => setShowPassword((current) => !current)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
           </label>
           <button className="btn btn-primary">Login</button>
         </form>

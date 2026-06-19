@@ -9,6 +9,7 @@ export default function RegisterPage() {
   const router = useRouter();
   const { register, googleLogin } = useAuth();
   const [form, setForm] = useState({ name: "", email: "", photoURL: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
   const fileInputRef = useRef(null);
 
   function handlePhotoSelect(event) {
@@ -47,6 +48,12 @@ export default function RegisterPage() {
           </label>
           <label className="form-control">
             <span className="label-text font-semibold">Photo URL</span>
+            {form.photoURL && (
+              <div className="mb-3 flex items-center gap-3 rounded-lg border border-slate-200 bg-white p-3">
+                <img src={form.photoURL} alt="Selected profile" className="h-14 w-14 rounded-full object-cover ring-2 ring-primary ring-offset-2" />
+                <span className="text-sm font-semibold text-slate-600">Photo ready for your profile</span>
+              </div>
+            )}
             <input
               className="input input-bordered cursor-pointer bg-white"
               value={form.photoURL ? "Photo selected successfully" : ""}
@@ -59,7 +66,24 @@ export default function RegisterPage() {
           </label>
           <label className="form-control">
             <span className="label-text font-semibold">Password</span>
-            <input className="input input-bordered bg-white" type="password" minLength={6} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required />
+            <div className="input input-bordered flex items-center gap-2 bg-white">
+              <input
+                className="grow bg-transparent outline-none"
+                type={showPassword ? "text" : "password"}
+                minLength={6}
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                required
+              />
+              <button
+                type="button"
+                className="btn btn-ghost btn-xs"
+                onClick={() => setShowPassword((current) => !current)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
           </label>
           <button className="btn btn-primary">Register</button>
         </form>
