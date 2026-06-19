@@ -1,6 +1,10 @@
 import { createAuthClient } from "better-auth/client";
 
-export const authClient = createAuthClient();
+const appURL = process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "");
+
+export const authClient = createAuthClient({
+  ...(appURL ? { baseURL: `${appURL}/api/auth` } : {})
+});
 
 export async function signInWithGoogle(callbackURL = "/") {
   const result = await authClient.signIn.social({
