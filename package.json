@@ -10,6 +10,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@better-auth/cli": "^1.2.12",
+    "better-auth": "^1.2.12",
     "daisyui": "^4.12.24",
     "motion": "^12.23.12",
     "next": "^15.4.6",

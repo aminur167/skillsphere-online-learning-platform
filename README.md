@@ -23,7 +23,8 @@ SkillSphere is a modern online learning platform where learners can explore skil
 - Update Information page for changing user name and image URL.
 - Persistent footer with contact details, social links, terms, and privacy pages.
 - Loader states, custom not-found page, and reload-safe App Router structure.
-- Frontend-only authentication flow using browser storage.
+- BetterAuth API scaffold with environment-variable based configuration.
+- Browser-friendly demo auth flow for smooth login, register, and profile updates.
 
 ## Tech Stack
 
@@ -32,6 +33,7 @@ SkillSphere is a modern online learning platform where learners can explore skil
 - JavaScript
 - Tailwind CSS
 - DaisyUI
+- BetterAuth
 - Motion
 - Swiper JS
 - React Hot Toast
@@ -43,14 +45,27 @@ SkillSphere is a modern online learning platform where learners can explore skil
 - `react-dom`
 - `tailwindcss`
 - `daisyui`
+- `better-auth`
 - `motion`
 - `swiper`
 - `react-hot-toast`
 - `eslint`
 
+## Environment Variables
+
+Create a `.env.local` file in the project root:
+
+```env
+BETTER_AUTH_SECRET="replace-with-a-long-random-secret"
+BETTER_AUTH_URL="http://localhost:3000"
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
+
 ## Authentication
 
-The app uses a frontend-only demo authentication flow with browser storage. Users can register, login, logout, update profile information, and upload a profile photo without any backend setup.
+The project includes a BetterAuth route scaffold at `src/app/api/auth/[...all]/route.js` and also keeps a browser-friendly demo auth flow so reviewers can register, login, logout, update profile information, and upload a profile photo without email verification.
 
 ## Run Locally
 
